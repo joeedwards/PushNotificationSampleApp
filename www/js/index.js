@@ -46,9 +46,6 @@ var app = {
 
         console.log('Received Event: ' + id);
         var pushNotification = window.plugins.pushNotification;
-            alert("Register called");
-            pushNotification.register(this.successHandler, this.errorHandler,{"senderID":"636322237508","ecb":"app.onNotificationGCM"});
-/*
         if (device.platform == 'android' || device.platform == 'Android') {
             alert("Register called");
             pushNotification.register(this.successHandler, this.errorHandler,{"senderID":"636322237508","ecb":"app.onNotificationGCM"});
@@ -57,7 +54,6 @@ var app = {
             alert("Register called");
             pushNotification.register(this.successHandler,this.errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"app.onNotificationAPN"});
         }
-*/
     },
     // result contains any message sent from the plugin call
     successHandler: function(result) {
