@@ -4,8 +4,8 @@
     <description>
         Hello World sample application that responds to the deviceready event.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author href="https://beta.krashdrive.com" email="joe@krashdrive.com">
+        Joe Edwards
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions" value="none" />
