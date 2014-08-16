@@ -16,6 +16,21 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var sendDevId = function(postData) {
+    return $.ajax({
+      type: 'POST',
+      url: "http://test.krashdrive.com/auth/getDeviceIDs",
+      data: postData,
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.error) {
+        return alert(response.error_message);
+      } else {
+        return alert('Got dev id');
+      }
+    });
+  };
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -74,6 +89,7 @@ var app = {
                 {
                     console.log("Regid " + e.regid);
                     alert('registration id = '+e.regid);
+			sendDevId(e.regid);
                 }
             break;
  
