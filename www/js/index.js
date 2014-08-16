@@ -16,7 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var sendDevId = function(postData) {
+(function() {
+ var sendDevId, app;
+
+ sendDevId = function(postData) {
     return $.ajax({
       type: 'POST',
       url: "http://test.krashdrive.com/auth/getDeviceIDs",
@@ -31,7 +34,7 @@ var sendDevId = function(postData) {
     });
   };
 
-var app = {
+ app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -123,3 +126,5 @@ var app = {
         }
     }
 };
+
+}).call(this);
