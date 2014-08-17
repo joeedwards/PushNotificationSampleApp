@@ -17,6 +17,11 @@
  * under the License.
  */
 
+//pushNotification.unregister(successHandler, errorHandler, options);
+
+//document.addEventListener("offline", onOffline, false);
+//document.addEventListener("backbutton", onBackKeyDown, false);
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -58,7 +63,13 @@ var app = {
             pushNotification.register(this.successHandler,this.errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"app.onNotificationAPN"});
         }
 */
-            pushNotification.register(this.successHandler, this.errorHandler,{"senderID":"636322237508","ecb":"app.onNotificationGCM"});
+            pushNotification.register(
+		this.successHandler,
+		this.errorHandler,
+		{
+			"senderID":"636322237508",
+			"ecb":"app.onNotificationGCM"
+		});
     },
     // result contains any message sent from the plugin call
     successHandler: function(result) {
@@ -68,10 +79,13 @@ var app = {
         alert(error);
     },
     onNotificationGCM: function(e) {
+        var pushNotification = window.plugins.pushNotification;
+
+/*
 	var objDevice = { 
 		device_id: 0
 	};
-
+*/
         switch( e.event )
         {
             case 'registered':
@@ -79,6 +93,20 @@ var app = {
                 {
                     console.log("Regid " + e.regid);
                     alert('registration id = '+e.regid);
+
+			window.localStorage.setItem("reg_id", e.regid);	
+			alert (window.localStorage.getItem("reg_id"));
+
+			$.ajax({
+			      type: 'POST',
+			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+			      data: e.regid,
+			      dataType: 'json'
+			}).
+/*
+
+//pushNotification.unregister(successHandler, errorHandler, options);
+
 			objDevice.device_id = e.regid;
 			$.ajax({
 			      type: 'POST',
@@ -92,6 +120,9 @@ var app = {
 			        alert('Got dev id');
 			      }
 		    	});
+*/
+
+			pushNotification.unregister(this.successHandler, this.errorHandler);
                 }
             break;
  
