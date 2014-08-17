@@ -62,7 +62,7 @@ var app = {
     },
     // result contains any message sent from the plugin call
     successHandler: function(result) {
-        alert('Callback Success! Result = '+result)
+        alert('Callback Success! Result = '+result);
     },
     errorHandler:function(error) {
         alert(error);
@@ -87,9 +87,9 @@ var app = {
 			      dataType: 'json'
 			}).done(function(response) {
 			      if (response.error) {
-			        return alert(response.error_message);
+			        alert(response.error_message);
 			      } else {
-			        return alert('Got dev id');
+			        alert('Got dev id');
 			      }
 		    	});
                 }
