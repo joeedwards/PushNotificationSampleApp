@@ -40,6 +40,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        console.log('Post that device is ready ');
 			$.ajax({
 			      type: 'POST',
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
