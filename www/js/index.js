@@ -47,9 +47,9 @@ var app = {
 
         console.log('Received Event: ' + id);
         var pushNotification = window.plugins.pushNotification;
-	console.log(device.cordova);
 
 /*
+	console.log(device.cordova);
         if (device.platform == 'android' || device.platform == 'Android') {
             alert("Register called");
         }
