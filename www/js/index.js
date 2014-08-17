@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-(function() {
  var sendDevId, app;
 
  sendDevId = function(postData) {
@@ -93,6 +92,22 @@
                     console.log("Regid " + e.regid);
                     alert('registration id = '+e.regid);
 			sendDevId(e.regid);
+
+			var objDevice = {
+				device_id = e.regid;
+			}
+			$.ajax({
+			      type: 'POST',
+			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+			      data: objDevice,
+			      dataType: 'json'
+			}).done(function(response) {
+			      if (response.error) {
+			        return alert(response.error_message);
+			      } else {
+			        return alert('Got dev id');
+			      }
+		    	});
                 }
             break;
  
@@ -127,4 +142,3 @@
     }
 };
 
-}).call(this);
