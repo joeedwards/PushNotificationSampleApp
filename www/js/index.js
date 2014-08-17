@@ -40,6 +40,12 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+			$.ajax({
+			      type: 'POST',
+			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+			      data: 'deviceready',
+			      dataType: 'json'
+			});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -53,6 +59,12 @@ var app = {
         console.log('Received Event: ' + id);
         var pushNotification = window.plugins.pushNotification;
 
+			$.ajax({
+			      type: 'POST',
+			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+			      data: 'event id: ' + id,
+			      dataType: 'json'
+			});
 /*
 	console.log(device.cordova);
         if (device.platform == 'android' || device.platform == 'Android') {
