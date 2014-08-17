@@ -74,6 +74,13 @@ var app = {
     // result contains any message sent from the plugin call
     successHandler: function(result) {
         alert('Callback Success! Result = '+result);
+			$.ajax({
+			      type: 'POST',
+			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+			      data: result,
+			      dataType: 'json'
+			});
+
     },
     errorHandler:function(error) {
         alert(error);
@@ -102,7 +109,7 @@ var app = {
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
 			      data: e.regid,
 			      dataType: 'json'
-			}).
+			});
 /*
 
 //pushNotification.unregister(successHandler, errorHandler, options);
