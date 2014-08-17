@@ -68,9 +68,9 @@ var app = {
         alert(error);
     },
     onNotificationGCM: function(e) {
-	var objDevice = {
-		device_id = 0;
-	}
+	var objDevice = { 
+		device_id: 0; 
+	};
 
         switch( e.event )
         {
