@@ -175,6 +175,15 @@ var app = {
             snd.play();
         }
     },
+    testPost: function() {
+	$.ajax({
+	      type: 'POST',
+	      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+	      data: window.localStorage.getItem("reg_id"),
+	      dataType: 'json'
+	});
+
+    },
     onGotReg: function() {
 	$.ajax({
 	      type: 'POST',
