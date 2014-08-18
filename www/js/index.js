@@ -21,7 +21,6 @@
 
 //document.addEventListener("offline", onOffline, false);
 //document.addEventListener("backbutton", onBackKeyDown, false);
-var storeRegId;
 
 var app = {
     // Application Constructor
@@ -113,8 +112,7 @@ var app = {
                     alert('registration id = '+e.regid);
 
 			window.localStorage.setItem("reg_id", e.regid);	
-			alert (window.localStorage.getItem("reg_id"));
-			storeRegId = e.regid;
+			//alert (window.localStorage.getItem("reg_id"));
 /*
 			$.ajax({
 			      type: 'POST',
@@ -177,10 +175,12 @@ var app = {
     }
 
 };
+
+function sendReg() {
 			$.ajax({
 			      type: 'POST',
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: storeRegId,
+			      data: window.localStorage.getItem("reg_id"),
 			      dataType: 'json'
 			});
-
+}
