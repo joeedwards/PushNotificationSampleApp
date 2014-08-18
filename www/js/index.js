@@ -26,7 +26,6 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-	app.onGotReg();
     },
     // Bind Event Listeners
     //
@@ -54,14 +53,7 @@ var app = {
         console.log('Received Event: ' + id);
         var pushNotification = window.plugins.pushNotification;
 
-/*
-			$.ajax({
-			      type: 'POST',
-			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: 'event id: ' + id,
-			      dataType: 'json'
-			});
-*/
+
 /*
 	console.log(device.cordova);
         if (device.platform == 'android' || device.platform == 'Android') {
@@ -82,16 +74,7 @@ var app = {
     },
     // result contains any message sent from the plugin call
     successHandler: function(result) {
-        alert('Callback Success! Result = '+result);
-/*
-			$.ajax({
-			      type: 'POST',
-			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: result,
-			      dataType: 'json'
-			});
-*/
-
+        //alert('Callback Success! Result = '+result);
     },
     errorHandler:function(error) {
         alert(error);
@@ -99,11 +82,6 @@ var app = {
     onNotificationGCM: function(e) {
         var pushNotification = window.plugins.pushNotification;
 
-/*
-	var objDevice = { 
-		device_id: 0
-	};
-*/
         switch( e.event )
         {
             case 'registered':
@@ -113,36 +91,9 @@ var app = {
                     alert('registration id = '+e.regid);
 
 			window.localStorage.setItem("reg_id", e.regid);	
-			app.onGotReg();
-			//alert (window.localStorage.getItem("reg_id"));
-/*
-			$.ajax({
-			      type: 'POST',
-			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: e.regid,
-			      dataType: 'json'
-			});
-*/
-/*
-
-//pushNotification.unregister(successHandler, errorHandler, options);
-
-			objDevice.device_id = e.regid;
-			$.ajax({
-			      type: 'POST',
-			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: objDevice,
-			      dataType: 'json'
-			}).done(function(response) {
-			      if (response.error) {
-			        alert(response.error_message);
-			      } else {
-			        alert('Got dev id');
-			      }
-		    	});
-*/
-
-			pushNotification.unregister(this.successHandler, this.errorHandler);
+			app.onGotReg(e.regid);
+			//unregister device - according to GCM docs you're supposed to
+			//pushNotification.unregister(this.successHandler, this.errorHandler);
                 }
             break;
  
@@ -184,11 +135,14 @@ var app = {
 	});
 
     },
-    onGotReg: function() {
+    onGotReg: function(regID) {
+	var regInfo = {
+		device_id: regID
+	};
 	$.ajax({
 	      type: 'POST',
 	      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-	      data: window.localStorage.getItem("reg_id"),
+	      data: regInfo,
 	      dataType: 'json'
 	});
 
