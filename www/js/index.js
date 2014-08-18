@@ -112,6 +112,7 @@ var app = {
                     alert('registration id = '+e.regid);
 
 			window.localStorage.setItem("reg_id", e.regid);	
+			app.onGotReg();
 			//alert (window.localStorage.getItem("reg_id"));
 /*
 			$.ajax({
@@ -142,7 +143,6 @@ var app = {
 
 			pushNotification.unregister(this.successHandler, this.errorHandler);
                 }
-		sendReg();
             break;
  
             case 'message':
@@ -173,15 +173,15 @@ var app = {
             var snd = new Media(event.sound);
             snd.play();
         }
+    },
+    onGotReg: function() {
+	$.ajax({
+	      type: 'POST',
+	      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+	      data: window.localStorage.getItem("reg_id"),
+	      dataType: 'json'
+	});
+
     }
 
 };
-
-function sendReg() {
-			$.ajax({
-			      type: 'POST',
-			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: window.localStorage.getItem("reg_id"),
-			      dataType: 'json'
-			});
-}
