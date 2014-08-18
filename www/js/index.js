@@ -23,7 +23,7 @@
 //document.addEventListener("backbutton", onBackKeyDown, false);
 
 var app = {
-	var storeRegId;
+	var storeRegId = 0;
     // Application Constructor
     initialize: function() {
         this.bindEvents();
