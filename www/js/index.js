@@ -21,9 +21,9 @@
 
 //document.addEventListener("offline", onOffline, false);
 //document.addEventListener("backbutton", onBackKeyDown, false);
+var storeRegId;
 
 var app = {
-	var storeRegId = 0;
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -174,13 +174,13 @@ var app = {
             var snd = new Media(event.sound);
             snd.play();
         }
-    },
+    }
+
+};
 			$.ajax({
 			      type: 'POST',
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
 			      data: storeRegId,
 			      dataType: 'json'
 			});
-};
-
 
