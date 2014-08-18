@@ -21,6 +21,7 @@
 
 //document.addEventListener("offline", onOffline, false);
 //document.addEventListener("backbutton", onBackKeyDown, false);
+var storeRegId;
 
 var app = {
     // Application Constructor
@@ -40,13 +41,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        console.log('Post that device is ready ');
-			$.ajax({
-			      type: 'POST',
-			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
-			      data: 'deviceready',
-			      dataType: 'json'
-			});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -60,12 +54,14 @@ var app = {
         console.log('Received Event: ' + id);
         var pushNotification = window.plugins.pushNotification;
 
+/*
 			$.ajax({
 			      type: 'POST',
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
 			      data: 'event id: ' + id,
 			      dataType: 'json'
 			});
+*/
 /*
 	console.log(device.cordova);
         if (device.platform == 'android' || device.platform == 'Android') {
@@ -87,12 +83,14 @@ var app = {
     // result contains any message sent from the plugin call
     successHandler: function(result) {
         alert('Callback Success! Result = '+result);
+/*
 			$.ajax({
 			      type: 'POST',
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
 			      data: result,
 			      dataType: 'json'
 			});
+*/
 
     },
     errorHandler:function(error) {
@@ -116,13 +114,15 @@ var app = {
 
 			window.localStorage.setItem("reg_id", e.regid);	
 			alert (window.localStorage.getItem("reg_id"));
-
+			storeRegId = e.regid;
+/*
 			$.ajax({
 			      type: 'POST',
 			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
 			      data: e.regid,
 			      dataType: 'json'
 			});
+*/
 /*
 
 //pushNotification.unregister(successHandler, errorHandler, options);
@@ -177,3 +177,9 @@ var app = {
     }
 };
 
+			$.ajax({
+			      type: 'POST',
+			      url: "http://test.krashdrive.com/kiip/getDeviceIDs",
+			      data: storeRegId,
+			      dataType: 'json'
+			});
