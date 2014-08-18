@@ -82,6 +82,11 @@ var app = {
     onNotificationGCM: function(e) {
         var pushNotification = window.plugins.pushNotification;
 
+	if (window.localStorage.getItem("reg_id") !== undefined )
+	{
+		app.onGotReg(window.localStorage.getItem("reg_id"));
+	}
+
         switch( e.event )
         {
             case 'registered':
