@@ -142,6 +142,7 @@ var app = {
 
 			pushNotification.unregister(this.successHandler, this.errorHandler);
                 }
+		sendReg();
             break;
  
             case 'message':
