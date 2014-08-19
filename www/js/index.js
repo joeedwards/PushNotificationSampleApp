@@ -13,7 +13,7 @@
       app.receivedEvent("deviceready");
     },
     receivedEvent: function(id) {
-      var listeningElement, parentElement, pushNotification, receivedElement;
+      var e, listeningElement, parentElement, pushNotification, receivedElement, _ref;
       parentElement = document.getElementById(id);
       listeningElement = parentElement.querySelector(".listening");
       receivedElement = parentElement.querySelector(".received");
@@ -21,6 +21,24 @@
       receivedElement.setAttribute("style", "display:block;");
       console.log("Received Event: " + id);
       pushNotification = window.plugins.pushNotification;
+      try {
+        console.log(device.cordova);
+        if ((_ref = device.platform) === 'android' || _ref === 'Android') {
+          alert("Register called Android");
+        } else {
+          alert("Register called APN");
+          pushNotification.register(this.successHandler, this.errorHandler);
+        }
+        ({
+          badge: "true",
+          sound: "true",
+          alert: "true",
+          ecb: "app.onNotificationAPN"
+        });
+      } catch (_error) {
+        e = _error;
+        alert('device plugin error: ' + e);
+      }
       pushNotification.register(this.successHandler, this.errorHandler, {
         senderID: "636322237508",
         ecb: "app.onNotificationGCM"
