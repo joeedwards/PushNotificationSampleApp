@@ -75,8 +75,6 @@ kiipApp.kdapp =
 		catch e
 			alert 'device plugin error: ' + e
 
-
-
 		return
 
 	
