@@ -12,9 +12,11 @@ namespace 'App.Load', (exports, top) ->
  */
 
 (function() {
-  com.krashdrive.kiipapp = typeof exports !== "undefined" && exports !== null ? exports : window;
+  var kiipApp;
 
-  com.krashdrive.kiipapp.kdapp = {
+  kiipApp = typeof exports !== "undefined" && exports !== null ? exports : window;
+
+  kiipApp.kdapp = {
     tester: function() {
       alert('test');
     },
@@ -25,7 +27,7 @@ namespace 'App.Load', (exports, top) ->
       document.addEventListener("deviceready", this.onDeviceReady, false);
     },
     onDeviceReady: function() {
-      com.krashdrive.kiipapp.kdapp.receivedEvent("deviceready");
+      kiipApp.kdapp.receivedEvent("deviceready");
     },
     receivedEvent: function(id) {
       var e, listeningElement, parentElement, pushNotification, receivedElement, _ref;
@@ -42,7 +44,7 @@ namespace 'App.Load', (exports, top) ->
           alert("Register called Android");
           pushNotification.register(this.successHandler, this.errorHandler, {
             senderID: "636322237508",
-            ecb: "com.krashdrive.kiipapp.kdapp.onNotificationGCM"
+            ecb: "kiipApp.kdapp.onNotificationGCM"
           });
         } else {
           alert("Register called APN");
@@ -50,7 +52,7 @@ namespace 'App.Load', (exports, top) ->
             badge: "true",
             sound: "true",
             alert: "true",
-            ecb: "com.krashdrive.kiipapp.kdapp.onNotificationAPN"
+            ecb: "kiipApp.kdapp.onNotificationAPN"
           });
         }
       } catch (_error) {
@@ -66,7 +68,7 @@ namespace 'App.Load', (exports, top) ->
       var pushNotification;
       pushNotification = window.plugins.pushNotification;
       try {
-        com.krashdrive.kiipapp.kdapp.onGotReg(window.localStorage.getItem("reg_id"));
+        kiipApp.kdapp.onGotReg(window.localStorage.getItem("reg_id"));
       } catch (_error) {
         e = _error;
         alert("window.localStorage.getItem " + e);
@@ -77,7 +79,7 @@ namespace 'App.Load', (exports, top) ->
             console.log("Regid " + e.regid);
             alert("registration id = " + e.regid);
             window.localStorage.setItem("reg_id", e.regid);
-            return com.krashdrive.kiipapp.kdapp.onGotReg(e.regid);
+            return kiipApp.kdapp.onGotReg(e.regid);
           }
           break;
         case "message":
