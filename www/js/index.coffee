@@ -7,13 +7,13 @@ namespace = (target, name, block) ->
 	target = target[item] or= {} for item in name.split '.'
 	block target, top
 
-namespace 'App.Load', (exports) ->
-	app
+namespace 'App.Load', (exports, top) ->
+	exports.kdapp = kdapp
 ###
 
+com.krashdrive.kiipapp = exports ? window
 
-
-window.kdapp =
+com.krashdrive.kiipapp.kdapp =
 	
 	tester: ->
 		alert 'test'

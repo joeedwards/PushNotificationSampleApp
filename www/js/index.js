@@ -7,12 +7,16 @@ namespace = (target, name, block) ->
 	target = target[item] or= {} for item in name.split '.'
 	block target, top
 
-namespace 'App.Load', (exports) ->
-	app
+namespace 'App.Load', (exports, top) ->
+	exports.kdapp = kdapp
  */
 
 (function() {
-  window.kdapp = {
+  var kdapp;
+
+  kdapp = typeof exports !== "undefined" && exports !== null ? exports : window;
+
+  kdapp.kdapp = {
     tester: function() {
       alert('test');
     },
