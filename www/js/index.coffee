@@ -1,6 +1,23 @@
 #document.addEventListener("offline", onOffline, false);
 #document.addEventListener("backbutton", onBackKeyDown, false);
-app =
+###
+namespace = (target, name, block) ->
+	[target, name, block] = [(if typeof exports isnt 'undefined' then exports else window), arguments...] if arguments.length < 3
+	top    = target
+	target = target[item] or= {} for item in name.split '.'
+	block target, top
+
+namespace 'App.Load', (exports) ->
+	app
+###
+
+
+
+window.kdapp =
+	
+	tester: ->
+		alert 'test'
+		return
 	
 	# Application Constructor
 	initialize: ->
@@ -43,21 +60,22 @@ app =
 		try
 			console.log device.cordova
 			if device.platform in ['android', 'Android']
-		            alert "Register called Android"
+				alert "Register called Android"
+				pushNotification.register @successHandler, @errorHandler,
+					senderID: "636322237508"
+					ecb: "app.onNotificationGCM"
 		        
-		        else
-		            alert "Register called APN"
-		            pushNotification.register @successHandler, @errorHandler,
-				badge:"true"
-				sound:"true"
-				alert:"true"
-				ecb:"app.onNotificationAPN"
+			else
+				alert "Register called APN"
+				pushNotification.register @successHandler, @errorHandler,
+					badge:"true"
+					sound:"true"
+					alert:"true"
+					ecb:"app.onNotificationAPN"
 		catch e
 			alert 'device plugin error: ' + e
 
-		pushNotification.register @successHandler, @errorHandler,
-			senderID: "636322237508"
-			ecb: "app.onNotificationGCM"
+
 
 		return
 
@@ -97,8 +115,8 @@ app =
 	onNotificationAPN: (event) ->
 		pushNotification = window.plugins.pushNotification
 		alert "Running in JS - onNotificationAPN - Received a notification! " + event.alert
-		navigator.notification.alert event.alert  if event.alert
-		pushNotification.setApplicationIconBadgeNumber @successHandler, @errorHandler, event.badge  if event.badge
+		navigator.notification.alert event.alert if event.alert
+		pushNotification.setApplicationIconBadgeNumber @successHandler, @errorHandler, event.badge if event.badge
 		if event.sound
 			snd = new Media(event.sound)
 			snd.play()
@@ -113,3 +131,4 @@ app =
 			dataType: "json"
 
 		return
+
