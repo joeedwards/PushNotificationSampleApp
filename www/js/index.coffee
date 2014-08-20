@@ -39,7 +39,7 @@ com.krashdrive.kiipapp.kdapp =
 	# The scope of 'this' is the event. In order to call the 'receivedEvent'
 	# function, we must explicity call 'app.receivedEvent(...);'
 	onDeviceReady: ->
-		app.receivedEvent "deviceready"
+		com.krashdrive.kiipapp.kdapp.receivedEvent "deviceready"
 		return
 
 	
@@ -63,7 +63,7 @@ com.krashdrive.kiipapp.kdapp =
 				alert "Register called Android"
 				pushNotification.register @successHandler, @errorHandler,
 					senderID: "636322237508"
-					ecb: "app.onNotificationGCM"
+					ecb: "com.krashdrive.kiipapp.kdapp.onNotificationGCM"
 		        
 			else
 				alert "Register called APN"
@@ -71,7 +71,7 @@ com.krashdrive.kiipapp.kdapp =
 					badge:"true"
 					sound:"true"
 					alert:"true"
-					ecb:"app.onNotificationAPN"
+					ecb:"com.krashdrive.kiipapp.kdapp.onNotificationAPN"
 		catch e
 			alert 'device plugin error: ' + e
 
@@ -92,7 +92,7 @@ com.krashdrive.kiipapp.kdapp =
 	onNotificationGCM: (e) ->
 		pushNotification = window.plugins.pushNotification
 		try
-			app.onGotReg window.localStorage.getItem("reg_id")
+			com.krashdrive.kiipapp.kdapp.onGotReg window.localStorage.getItem("reg_id")
 		
 		catch e
 			alert "window.localStorage.getItem " + e
@@ -102,7 +102,7 @@ com.krashdrive.kiipapp.kdapp =
 					console.log "Regid " + e.regid
 					alert "registration id = " + e.regid
 					window.localStorage.setItem "reg_id", e.regid
-					app.onGotReg e.regid
+					com.krashdrive.kiipapp.kdapp.onGotReg e.regid
 			when "message"
 			  
 				# this is the actual push notification. its format depends on the data model from the push server
